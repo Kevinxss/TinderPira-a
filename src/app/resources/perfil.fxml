@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="400.0" spacing="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.PerfilController">
+    <children>
+        <ImageView fx:id="fotoUsuario" fitHeight="127.0" fitWidth="171.0" preserveRatio="true" />
+        <Label fx:id="nombreLabel" prefHeight="20.0" prefWidth="141.0" text="Nombre: " />
+        <Label fx:id="correoLabel" prefHeight="25.0" prefWidth="139.0" text="Correo: " />
+        <Label fx:id="fechaLabel" prefHeight="33.0" prefWidth="139.0" text="Cumpleaños: " />
+        <Label fx:id="generoLabel" prefHeight="28.0" prefWidth="147.0" text="Género: " />
+    </children>
+</VBox>

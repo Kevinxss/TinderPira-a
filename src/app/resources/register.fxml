@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="app.controller.RegisterController">
+    <TextField fx:id="nombreField" layoutX="100" layoutY="50" promptText="Nombre"/>
+    <TextField fx:id="apellidoField" layoutX="100" layoutY="100" promptText="Apellido"/>
+    <TextField fx:id="generoField" layoutX="100" layoutY="150" promptText="Genero"/>
+    <TextField fx:id="cumpleanosField" layoutX="100" layoutY="200" promptText="Cumpleaños"/>
+    <TextField fx:id="correoField" layoutX="100" layoutY="250" promptText="Correo"/>
+    <TextField fx:id="edadField" layoutX="100" layoutY="300" promptText ="Edad"/>
+    <PasswordField fx:id="passwordField" layoutX="100" layoutY="350" promptText="Contraseña"/>
+    <Button text="Seleccionar Foto de Perfil" layoutX="100" layoutY="400" onAction="#seleccionarImagen"/>
+    <ImageView fx:id="imageViewPerfil" layoutX="150" layoutY="450" fitHeight="100" fitWidth="100" preserveRatio="true"/>
+    <Button layoutX="150" layoutY="500" text="Registrar" onAction="#registrarUsuario"/>
+    
+
+</AnchorPane>

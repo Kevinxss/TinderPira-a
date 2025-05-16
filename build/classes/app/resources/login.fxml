@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?> <!-- Cambiar VBox por AnchorPane -->
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="app.controller.LoginController">
+    <TextField fx:id="correoField" layoutX="50" layoutY="150" promptText="Correo"/>
+    <PasswordField fx:id="passwordField" layoutX="50" layoutY="200" promptText="Contraseña"/>
+    <Button layoutX="50" layoutY="250" text="Entrar" onAction="#iniciarSesion"/>
+</AnchorPane>

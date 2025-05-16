@@ -1,0 +1,18 @@
+body{
+    padding: 20px;
+    margin: 20px;
+}
+.root {
+    -fx-background-color: #f0f0f0;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #333;
+}
+
+.button {
+    -fx-background-color: #6200ee;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

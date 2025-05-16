@@ -1,0 +1,52 @@
+[
+  {
+    "nombreUsuario": "Daniel",
+    "apellido": "SRC",
+    "edad": "23",
+    "genero": "Hombre",
+    "cumpleanos": "21 de mayo",
+    "correo": "Daniela@",
+    "contrasena": "12",
+    "fotoPerfil": "C:\\Users\\kgon5\\Desktop\\Projec\\App\\perfilespng\\ab6761610000e5ebdfbb5ea0469adda59944b83a.jpeg"
+  },
+  {
+    "nombreUsuario": "Jorge",
+    "apellido": "Ramos",
+    "edad": "20",
+    "genero": "Hombre",
+    "cumpleanos": "11 de mayo",
+    "correo": "Jorge@",
+    "contrasena": "12",
+    "fotoPerfil": "C:\\Users\\kgon5\\Desktop\\Projec\\App\\perfilespng\\images (1).jpeg"
+  },
+  {
+    "nombreUsuario": "Mike",
+    "apellido": "Vazquez",
+    "edad": "29",
+    "genero": "Hombre",
+    "cumpleanos": "3 de Enero",
+    "correo": "Mike@",
+    "contrasena": "12",
+    "fotoPerfil": "C:\\Users\\kgon5\\Desktop\\Projec\\App\\perfilespng\\images.jpeg"
+  },
+  {
+    "nombreUsuario": "Edi",
+    "apellido": "Flores",
+    "edad": "25",
+    "genero": "Hombre",
+    "cumpleanos": "3 de Diciembre",
+    "correo": "Edi@",
+    "contrasena": "12",
+    "fotoPerfil": "C:\\Users\\kgon5\\Desktop\\Projec\\App\\perfilespng\\premium_photo-1688891564708-9b2247085923.jpeg"
+  },
+  {
+    "nombreUsuario": "Amanda",
+    "apellido": "Rodriguez",
+    "edad": "35",
+    "genero": "Mujer",
+    "cumpleanos": "23 de Noviembre",
+    "correo": "Amanda@",
+    "contrasena": "12",
+    "fotoPerfil": "C:\\Users\\kgon5\\Desktop\\Projec\\App\\perfilespng\\premium_photo-1689551670902-19b441a6afde.jpeg"
+  }
+]
