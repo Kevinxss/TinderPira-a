@@ -64,7 +64,6 @@ public class HomeController {
     }
 
     private void hacerMatch() {
-        // Lógica de hacer match
         System.out.println("Match con " + usuarioActual.getnombreUsuario());
         avanzarUsuario();
     }

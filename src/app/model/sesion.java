@@ -15,7 +15,6 @@ public class sesion {
 
     // Método corregido para obtener el usuario actual
     public static User getUsuarioActual() {
-        // Llamar al método ya existente que devuelve el usuario
         return getUsuario();
     }
 }

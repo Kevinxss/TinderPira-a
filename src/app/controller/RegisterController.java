@@ -46,7 +46,7 @@ public class RegisterController {
     @FXML
     private ImageView imageViewPerfil;
 
-    private String rutaImagenPerfil; // Ruta de imagen seleccionada
+    private String rutaImagenPerfil; 
 
     private static final String ARCHIVO_USUARIOS = "usuarios.json";
 
@@ -82,7 +82,7 @@ public class RegisterController {
         }
 
         if (rutaImagenPerfil == null) {
-            rutaImagenPerfil = ""; // O una imagen por defecto si lo prefieres
+            rutaImagenPerfil = ""; 
         }
 
         User nuevoUsuario = new User(nombre, apellido, edad, genero, cumpleanos, correo, contraseña, rutaImagenPerfil);
