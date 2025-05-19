@@ -1,4 +1,5 @@
 package app.model;
+
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -12,26 +13,34 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import java.io.File;
 
+/**
+ * Controlador de la vista principal (Home).
+ * Muestra posibles coincidencias (matches) para el usuario actual y permite aceptarlas o rechazarlas.
+ */
 public class HomeController {
 
-    @FXML
-    private ImageView imagenUsuario;
-    @FXML
-    private Text nombreUsuario;
-    @FXML
-    private Text edadUsuario;
-    @FXML
-    private Button botonMatch;
-    @FXML
-    private Button botonNo;
+    @FXML private ImageView imagenUsuario;
+    @FXML private Text nombreUsuario;
+    @FXML private Text edadUsuario;
+    @FXML private Button botonMatch;
+    @FXML private Button botonNo;
+
+    /** Lista de posibles matches compatibles por edad */
     private List<User> posiblesMatches;
-    private int indiceActual =0;
+
+    /** Índice del usuario mostrado actualmente */
+    private int indiceActual = 0;
+
+    /** Usuario que ha iniciado sesión */
     private User usuarioActual;
 
+    /**
+     * Inicializa la vista al cargar el FXML.
+     * Carga los posibles matches y muestra el primero si existe.
+     */
     @FXML
     public void initialize() {
-        // Obtener el usuario actual desde la sesión
-        usuarioActual =sesion.getUsuarioActual();
+        usuarioActual = sesion.getUsuarioActual();
         posiblesMatches = cargarPosiblesMatches("usuarios.json", usuarioActual);
 
         if (!posiblesMatches.isEmpty()) {
@@ -41,10 +50,14 @@ public class HomeController {
         }
     }
 
+    /**
+     * Muestra la información de un usuario en pantalla.
+     * @param usuario Usuario a mostrar.
+     */
     private void mostrarUsuario(User usuario) {
-        
         usuarioActual = usuario;
-        // Mostrar la foto desde archivo
+
+        // Mostrar imagen
         String ruta = usuario.getfotoPerfil();
         File archivo = new File(ruta);
         if (archivo.exists()) {
@@ -54,64 +67,85 @@ public class HomeController {
             System.out.println("No se encontró la imagen en: " + ruta);
         }
 
-        // Mostrar el nombre y la edad
+        // Mostrar nombre y edad
         nombreUsuario.setText(usuario.getnombreUsuario() + " " + usuario.getapellido());
         edadUsuario.setText(usuario.getedad() + " años");
 
-        // Funcionalidad de los botones
+        // Configurar botones
         botonMatch.setOnAction(event -> hacerMatch());
         botonNo.setOnAction(event -> rechazarMatch());
     }
 
+    /**
+     * Acción cuando el usuario acepta un match.
+     */
     private void hacerMatch() {
         System.out.println("Match con " + usuarioActual.getnombreUsuario());
         avanzarUsuario();
     }
 
+    /**
+     * Acción cuando el usuario rechaza un match.
+     */
     private void rechazarMatch() {
-        // Lógica de rechazo
         System.out.println("Rechazado " + usuarioActual.getnombreUsuario());
         avanzarUsuario();
     }
-    
-    private void avanzarUsuario(){
-        indiceActual ++;
-        if(indiceActual < posiblesMatches.size()){
+
+    /**
+     * Avanza al siguiente usuario en la lista de posibles matches.
+     * Si no hay más usuarios, desactiva los botones.
+     */
+    private void avanzarUsuario() {
+        indiceActual++;
+        if (indiceActual < posiblesMatches.size()) {
             mostrarUsuario(posiblesMatches.get(indiceActual));
-        }else{
-            nombreUsuario.setText("No hay mas usuarios");
+        } else {
+            nombreUsuario.setText("No hay más usuarios");
             edadUsuario.setText("");
             imagenUsuario.setImage(null);
             botonMatch.setDisable(true);
             botonNo.setDisable(true);
-            
         }
     }
-    public static List<User> cargarPosiblesMatches(String archivoJson, User usuarioActual){
-        List<User>posiblesMatches = new ArrayList<>();
-        
-        try{
-            //leemos los datos
+
+    /**
+     * Carga los usuarios compatibles desde el archivo JSON.
+     * Solo incluye aquellos cuya edad esté en un rango de ±5 años con respecto al usuario actual,
+     * y que no sean el mismo usuario.
+     *
+     * @param archivoJson Ruta del archivo JSON.
+     * @param usuarioActual Usuario que ha iniciado sesión.
+     * @return Lista de posibles matches.
+     */
+    public static List<User> cargarPosiblesMatches(String archivoJson, User usuarioActual) {
+        List<User> posiblesMatches = new ArrayList<>();
+
+        try {
             Gson gson = new Gson();
-            Type listType = new TypeToken<List<User>>(){}.getType();
+            Type listType = new TypeToken<List<User>>() {}.getType();
             FileReader reader = new FileReader(archivoJson);
             List<User> todosLosUsuarios = gson.fromJson(reader, listType);
             reader.close();
-            
-            for(User u: todosLosUsuarios){
-                if(!u.getnombreUsuario().equals(usuarioActual.getnombreUsuario())||!u.getapellido().equals(usuarioActual.getapellido())){
+
+            for (User u : todosLosUsuarios) {
+                boolean esOtroUsuario = !u.getnombreUsuario().equals(usuarioActual.getnombreUsuario()) ||
+                                        !u.getapellido().equals(usuarioActual.getapellido());
+
+                if (esOtroUsuario) {
                     int edadU = Integer.parseInt(u.getedad());
                     int edadActual = Integer.parseInt(usuarioActual.getedad());
                     int diferenciaEdad = Math.abs(edadU - edadActual);
-                    if (diferenciaEdad <= 5){
+
+                    if (diferenciaEdad <= 5) {
                         posiblesMatches.add(u);
                     }
                 }
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return posiblesMatches;
     }
 }

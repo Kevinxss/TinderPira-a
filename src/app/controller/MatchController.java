@@ -13,13 +13,28 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controlador para la vista de coincidencias (Match).
+ * Se encarga de mostrar una lista de usuarios cuya edad esté dentro de un rango de ±5 años
+ * respecto al usuario actual en sesión.
+ */
 public class MatchController {
 
+    /**
+     * ListView para mostrar los posibles matches del usuario.
+     */
     @FXML
     private ListView<String> listaMatches;
 
+    /**
+     * Ruta del archivo JSON que contiene los usuarios registrados.
+     */
     private static final String ARCHIVO_USUARIOS = "usuarios.json";
 
+    /**
+     * Método que se ejecuta automáticamente al cargar la vista.
+     * Busca al usuario actual y genera su lista de coincidencias.
+     */
     @FXML
     public void initialize() {
         User usuarioActual = sesion.getUsuarioActual();
@@ -31,6 +46,13 @@ public class MatchController {
         }
     }
 
+    /**
+     * Filtra y obtiene una lista de usuarios cuya edad esté dentro del rango ±5 años
+     * respecto a la edad del usuario actual.
+     *
+     * @param usuarioActual El usuario que ha iniciado sesión.
+     * @return Lista de posibles coincidencias (matches).
+     */
     private List<User> obtenerMatches(User usuarioActual) {
         List<User> todos = cargarUsuarios();
         List<User> posiblesMatches = new ArrayList<>();
@@ -40,8 +62,7 @@ public class MatchController {
 
             for (User u : todos) {
                 if (u.getcorreo().equals(usuarioActual.getcorreo())) {
-                    continue; // No compararse consigo mismo
-                } else {
+                    continue; // Evitar compararse a sí mismo
                 }
 
                 try {
@@ -50,7 +71,7 @@ public class MatchController {
                         posiblesMatches.add(u);
                     }
                 } catch (NumberFormatException ignored) {
-                    // Ignorar usuarios con edad inválida
+                    // Ignorar usuarios con edad no válida
                 }
             }
 
@@ -61,6 +82,11 @@ public class MatchController {
         return posiblesMatches;
     }
 
+    /**
+     * Carga todos los usuarios desde el archivo JSON.
+     *
+     * @return Lista de usuarios registrados. Si ocurre un error, retorna una lista vacía.
+     */
     private List<User> cargarUsuarios() {
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(ARCHIVO_USUARIOS)) {
@@ -72,6 +98,11 @@ public class MatchController {
         }
     }
 
+    /**
+     * Muestra en la interfaz la lista de usuarios que coinciden con el rango de edad.
+     *
+     * @param matches Lista de usuarios que coinciden.
+     */
     private void mostrarMatches(List<User> matches) {
         if (matches.isEmpty()) {
             listaMatches.getItems().add("No se encontraron coincidencias.");
